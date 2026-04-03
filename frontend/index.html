@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediDonate – Medicine Donation System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand" onclick="showPage('home')">
+      <span class="brand-icon">⚕</span>
+      <span class="brand-name">MediDonate</span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a onclick="showPage('home')" class="nav-link">Home</a>
+      <a onclick="showPage('login')" class="nav-link" id="navLogin">Login</a>
+      <a onclick="showPage('register')" class="nav-link" id="navRegister">Register</a>
+      <a onclick="showPage('dashboard')" class="nav-link hidden" id="navDashboard">Dashboard</a>
+      <span class="nav-user hidden" id="navUser"></span>
+      <button class="btn-logout hidden" id="navLogout" onclick="logout()">Logout</button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════ HOME PAGE ═══════════════════════════════ -->
+  <div id="page-home" class="page active">
+    <section class="hero">
+      <div class="hero-bg">
+        <div class="hero-blob b1"></div>
+        <div class="hero-blob b2"></div>
+        <div class="hero-blob b3"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">Connecting lives, one medicine at a time</div>
+        <h1 class="hero-title">Medicine<br /><em>shouldn't</em><br />run out.</h1>
+        <p class="hero-sub">MediDonate bridges the gap between donors with surplus medicine and NGOs serving communities in need — transparently, safely, compassionately.</p>
+        <div class="hero-cta">
+          <button class="btn-primary" onclick="showPage('register')">Join as Donor / NGO</button>
+          <button class="btn-ghost" onclick="showPage('login')">Sign In</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="stat-float s1"><span class="stat-num">2.4K+</span><span class="stat-label">Medicines Donated</span></div>
+        <div class="stat-float s2"><span class="stat-num">380+</span><span class="stat-label">NGOs Served</span></div>
+        <div class="stat-float s3"><span class="stat-num">1.1K+</span><span class="stat-label">Donors Active</span></div>
+        <div class="pill-orbit">
+          <div class="pill p1"></div>
+          <div class="pill p2"></div>
+          <div class="pill p3"></div>
+          <div class="pill-center">💊</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-it-works">
+      <h2 class="section-title">How It Works</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">01</div>
+          <div class="step-icon">🏥</div>
+          <h3>NGO Posts Request</h3>
+          <p>NGOs register and post medicine requests with urgency level and quantity needed.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">02</div>
+          <div class="step-icon">🤲</div>
+          <h3>Donor Responds</h3>
+          <p>Donors browse requests and submit available medicines with full details.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">03</div>
+          <div class="step-icon">🔍</div>
+          <h3>Admin Reviews</h3>
+          <p>Admins verify donation details and approve or reject with reasons.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-num">04</div>
+          <div class="step-icon">✅</div>
+          <h3>Delivered & Confirmed</h3>
+          <p>Donor ships the medicine; NGO confirms receipt to complete the chain.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="roles-section">
+      <div class="role-card ngo-card">
+        <div class="role-icon">🏥</div>
+        <h3>For NGOs</h3>
+        <ul>
+          <li>Post medicine requests instantly</li>
+          <li>Set urgency levels</li>
+          <li>Track incoming donations</li>
+          <li>Confirm receipts</li>
+        </ul>
+        <button class="btn-role" onclick="showPage('register')">Register as NGO →</button>
+      </div>
+      <div class="role-card donor-card">
+        <div class="role-icon">💊</div>
+        <h3>For Donors</h3>
+        <ul>
+          <li>Browse medicine requests</li>
+          <li>Submit donation details</li>
+          <li>Track approval status</li>
+          <li>Mark medicines dispatched</li>
+        </ul>
+        <button class="btn-role" onclick="showPage('register')">Register as Donor →</button>
+      </div>
+      <div class="role-card admin-card">
+        <div class="role-icon">🛡️</div>
+        <h3>For Admins</h3>
+        <ul>
+          <li>Review all donations</li>
+          <li>Approve valid submissions</li>
+          <li>Reject with detailed reasons</li>
+          <li>Full platform oversight</li>
+        </ul>
+        <button class="btn-role" onclick="showPage('register')">Register as Admin →</button>
+      </div>
+    </section>
+  </div>
+
+  <!-- ═══════════════════════════════ LOGIN PAGE ════════════════════════════════ -->
+  <div id="page-login" class="page">
+    <div class="auth-wrapper">
+      <div class="auth-panel">
+        <div class="auth-decoration"></div>
+        <div class="auth-form-area">
+          <div class="auth-logo">⚕ MediDonate</div>
+          <h2 class="auth-title">Welcome back</h2>
+          <p class="auth-sub">Sign in to continue your mission</p>
+          <div id="loginAlert" class="alert hidden"></div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="loginEmail" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" />
+          </div>
+          <button class="btn-auth" onclick="doLogin()">Sign In</button>
+          <p class="auth-switch">Don't have an account? <a onclick="showPage('register')">Register here</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════ REGISTER PAGE ════════════════════════════════ -->
+  <div id="page-register" class="page">
+    <div class="auth-wrapper">
+      <div class="auth-panel wide">
+        <div class="auth-decoration"></div>
+        <div class="auth-form-area">
+          <div class="auth-logo">⚕ MediDonate</div>
+          <h2 class="auth-title">Create Account</h2>
+          <p class="auth-sub">Join the donation network today</p>
+          <div id="registerAlert" class="alert hidden"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Full Name</label>
+              <input type="text" id="regName" placeholder="Your name" />
+            </div>
+            <div class="form-group">
+              <label>City</label>
+              <input type="text" id="regCity" placeholder="Your city" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="regEmail" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input type="password" id="regPassword" placeholder="Minimum 6 characters" />
+          </div>
+          <div class="form-group">
+            <label>Register as</label>
+            <div class="role-selector">
+              <label class="role-option">
+                <input type="radio" name="regRole" value="ngo" />
+                <span class="role-btn"><span class="role-btn-icon">🏥</span> NGO</span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="regRole" value="donor" />
+                <span class="role-btn"><span class="role-btn-icon">💊</span> Donor</span>
+              </label>
+              <label class="role-option">
+                <input type="radio" name="regRole" value="admin" />
+                <span class="role-btn"><span class="role-btn-icon">🛡️</span> Admin</span>
+              </label>
+            </div>
+          </div>
+          <button class="btn-auth" onclick="doRegister()">Create Account</button>
+          <p class="auth-switch">Already registered? <a onclick="showPage('login')">Sign in</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════ DASHBOARD PAGES ══════════════════════════════ -->
+  <div id="page-dashboard" class="page">
+
+    <!-- NGO DASHBOARD -->
+    <div id="ngo-dashboard" class="dashboard hidden">
+      <div class="dash-header">
+        <div>
+          <h2 class="dash-title">NGO Dashboard</h2>
+          <p class="dash-sub" id="ngoGreeting">Welcome back!</p>
+        </div>
+        <button class="btn-primary" onclick="openModal('createRequestModal')">+ New Request</button>
+      </div>
+      <div class="tab-bar">
+        <button class="tab active" onclick="switchTab('ngo', 'requests', this)">My Requests</button>
+        <button class="tab" onclick="switchTab('ngo', 'donations', this)">Incoming Donations</button>
+      </div>
+      <div id="ngo-tab-requests" class="tab-content">
+        <div id="ngoRequestsList" class="cards-grid"></div>
+      </div>
+      <div id="ngo-tab-donations" class="tab-content hidden">
+        <div id="ngoDonationsList" class="cards-grid"></div>
+      </div>
+    </div>
+
+    <!-- DONOR DASHBOARD -->
+    <div id="donor-dashboard" class="dashboard hidden">
+      <div class="dash-header">
+        <div>
+          <h2 class="dash-title">Donor Dashboard</h2>
+          <p class="dash-sub" id="donorGreeting">Welcome back!</p>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <button class="tab active" onclick="switchTab('donor', 'browse', this)">Browse Requests</button>
+        <button class="tab" onclick="switchTab('donor', 'mydonations', this)">My Donations</button>
+      </div>
+      <div id="donor-tab-browse" class="tab-content">
+        <div id="donorRequestsList" class="cards-grid"></div>
+      </div>
+      <div id="donor-tab-mydonations" class="tab-content hidden">
+        <div id="donorDonationsList" class="cards-grid"></div>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="admin-dashboard" class="dashboard hidden">
+      <div class="dash-header">
+        <div>
+          <h2 class="dash-title">Admin Dashboard</h2>
+          <p class="dash-sub" id="adminGreeting">Platform oversight</p>
+        </div>
+      </div>
+      <div class="tab-bar">
+        <button class="tab active" onclick="switchTab('admin', 'pending', this)">Pending Review</button>
+        <button class="tab" onclick="switchTab('admin', 'all', this)">All Donations</button>
+        <button class="tab" onclick="switchTab('admin', 'requests', this)">All Requests</button>
+      </div>
+      <div id="admin-tab-pending" class="tab-content">
+        <div id="adminPendingList" class="cards-grid"></div>
+      </div>
+      <div id="admin-tab-all" class="tab-content hidden">
+        <div id="adminAllList" class="cards-grid"></div>
+      </div>
+      <div id="admin-tab-requests" class="tab-content hidden">
+        <div id="adminRequestsList" class="cards-grid"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════ MODALS ════════════════════════════════════ -->
+
+  <!-- Create Request Modal (NGO) -->
+  <div class="modal-overlay hidden" id="createRequestModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>New Medicine Request</h3>
+        <button class="modal-close" onclick="closeModal('createRequestModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="requestModalAlert" class="alert hidden"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Medicine Name</label>
+            <input type="text" id="reqMedicine" placeholder="e.g. Paracetamol 500mg" />
+          </div>
+          <div class="form-group">
+            <label>Quantity (units)</label>
+            <input type="number" id="reqQuantity" placeholder="e.g. 100" min="1" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="reqCity" placeholder="City" />
+          </div>
+          <div class="form-group">
+            <label>Urgency Level</label>
+            <select id="reqUrgency">
+              <option value="">Select urgency</option>
+              <option value="low">🟢 Low</option>
+              <option value="medium">🟡 Medium</option>
+              <option value="high">🟠 High</option>
+              <option value="critical">🔴 Critical</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal('createRequestModal')">Cancel</button>
+        <button class="btn-primary" onclick="submitRequest()">Submit Request</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Donate Modal (Donor) -->
+  <div class="modal-overlay hidden" id="donateModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <h3>Donate Medicine</h3>
+        <button class="modal-close" onclick="closeModal('donateModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="request-context" id="donateRequestContext"></div>
+        <div id="donateModalAlert" class="alert hidden"></div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Medicine Name</label>
+            <input type="text" id="donMedicine" placeholder="Exact medicine name" />
+          </div>
+          <div class="form-group">
+            <label>Brand / Manufacturer</label>
+            <input type="text" id="donBrand" placeholder="Optional" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Quantity (units)</label>
+            <input type="number" id="donQuantity" placeholder="e.g. 50" min="1" />
+          </div>
+          <div class="form-group">
+            <label>Expiry Date</label>
+            <input type="date" id="donExpiry" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Medicine Condition</label>
+          <select id="donCondition">
+            <option value="">Select condition</option>
+            <option value="sealed">Sealed / Unopened</option>
+            <option value="opened">Opened (partially used)</option>
+            <option value="near_expiry">Near Expiry (within 3 months)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Additional Note</label>
+          <textarea id="donNote" placeholder="Any additional information..." rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal('donateModal')">Cancel</button>
+        <button class="btn-primary" onclick="submitDonation()">Submit Donation</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Approve Modal (Admin) -->
+  <div class="modal-overlay hidden" id="approveModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Approve Donation</h3>
+        <button class="modal-close" onclick="closeModal('approveModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="donation-detail-box" id="approveDonationDetail"></div>
+        <div id="approveModalAlert" class="alert hidden"></div>
+        <div class="form-group">
+          <label>Admin Note (optional)</label>
+          <textarea id="approveNote" placeholder="Add a note for the donor..." rows="3"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal('approveModal')">Cancel</button>
+        <button class="btn-success" onclick="confirmApprove()">✓ Approve</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reject Modal (Admin) -->
+  <div class="modal-overlay hidden" id="rejectModal">
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Reject Donation</h3>
+        <button class="modal-close" onclick="closeModal('rejectModal')">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="rejectModalAlert" class="alert hidden"></div>
+        <div class="form-group">
+          <label>Reason for Rejection <span class="required">*</span></label>
+          <textarea id="rejectReason" placeholder="Explain why this donation is being rejected..." rows="4"></textarea>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-ghost" onclick="closeModal('rejectModal')">Cancel</button>
+        <button class="btn-danger" onclick="confirmReject()">✕ Reject</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
